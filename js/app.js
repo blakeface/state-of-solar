@@ -5,9 +5,9 @@ $(function (){
   });
 
   $('#map').usmap({
-    'stateStyles': {fill: 'rgb(74, 137, 163)'},
-    'stateHoverStyles': {fill: 'rgb(171, 73, 73)'},
-    'stateHoverAnimation': 300,
+    'stateStyles': {fill: '#'},
+    'stateHoverStyles': {fill: '#4b70b6'},
+    'stateHoverAnimation': 150,
     click: function(event, data) {
       // persistence function
       // if(localStorage.getItem(data.name)){
@@ -20,6 +20,7 @@ $(function (){
       // pop-up function
       (function pop (){
         $('.popUp').show()
+        $('popUpInner').append('<h1>hi</h1>')
       })()
 
       // solar count & cost API

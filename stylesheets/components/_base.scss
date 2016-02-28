@@ -1,11 +1,49 @@
 .title {
+  @include zerombp(0px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  font-family: geoSansLight;
+  font-size: 50px;
+  margin-top: 20px;
+}
+
+.title h3 {
+  @include zerombp(0px);
+}
+
+.container {
+  @include zerombp(0px);
+  width: 100vw;
+  margin-bottom: 15%
+}
+
+.mapContainer {
+  @include zerombp(0px);
   width: 100vw;
   display: flex;
   justify-content: center;
 }
 
-.container {
+.info {
+  @include zerombp(0px);
   width: 100vw;
   display: flex;
   justify-content: center;
+}
+
+.info a {
+  font-family: geosanslight;
+  font-size: 30px;
+  color: black;
+  text-decoration: none;
+  margin: 10px;
+}
+
+body {
+  @include zerombp(0px);
+  background-image: url('../solarbg2.jpg');
+  background-attachment: fixed;
+  background-position: bottom;
+  background-size: 100%;
 }
