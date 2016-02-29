@@ -18,10 +18,18 @@ $(function (){
       // }
 
       // pop-up function
-      (function pop (){
-        $('.popUp').show()
-        $('popUpInner').append('<h1>hi</h1>')
-      })()
+      // $(data.stateShape).animate({
+      //   'width': '400px',
+      //   'height': '400px',
+      //   'left': '90px',
+      //   'top': '90px',
+      //   'background': 'black'
+      // }, 200)
+
+      // (function pop (){
+      // $('.popUp').show()
+      // $('popUpInner').append('<h1>hi</h1>')
+      // }())
 
       // solar count & cost API
       $.ajax({
@@ -29,7 +37,22 @@ $(function (){
         type: 'GET',
         dataType: 'json',
         success: function(response){
-          console.log(response)
+          countArr = [];
+          costArr = [];
+          countTotal = 0;
+          costTotal = 0;
+          for ( var i = 0; i < response.result.length; i++ ) {
+            countArr.push(response.result[i].count);
+            costArr.push(response.result[i].cost);
+          }
+          $.each(countArr, function(){
+            countTotal += this;
+          })
+          $.each(costArr, function(){
+            costTotal += this;
+          })
+          console.log('countTotal', countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
+          console.log('costTotal', Number(costTotal).toFixed(2));
         }
       });
 
@@ -39,7 +62,7 @@ $(function (){
         type: 'GET',
         dataType: 'json',
         success: function(response){
-          console.log(response)
+            console.log('policies', response.result.length)
         }
       });
 

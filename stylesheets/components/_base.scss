@@ -42,8 +42,9 @@
 
 body {
   @include zerombp(0px);
-  background-image: url('../solarbg2.jpg');
+  background-image: url('../images/solarbg2.jpg');
   background-attachment: local;
   background-position: bottom;
   background-size: 100%;
+  background-repeat: no-repeat;
 }
