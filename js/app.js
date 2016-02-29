@@ -17,42 +17,37 @@ $(function (){
       //   localStorage.setItem({state: data.name, count: 1});
       // }
 
-      // pop-up function
-      // $(data.stateShape).animate({
-      //   'width': '400px',
-      //   'height': '400px',
-      //   'left': '90px',
-      //   'top': '90px',
-      //   'background': 'black'
-      // }, 200)
-
-      // (function pop (){
-      // $('.popUp').show()
-      // $('popUpInner').append('<h1>hi</h1>')
-      // }())
 
       // solar count & cost API
+      countArr = [];
+      costArr = [];
+
+      countTotal = 0;
+      countTotalFormatted = countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+      costTotal = 0;
+      costTotalAveraged = (costTotal/costArr.length).toFixed(2);
+
       $.ajax({
         url: 'https://developer.nrel.gov/api/solar/open_pv/installs/rankings?state='+data.name+'&api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&format=JSON',
         type: 'GET',
         dataType: 'json',
         success: function(response){
-          countArr = [];
-          costArr = [];
-          countTotal = 0;
-          costTotal = 0;
           for ( var i = 0; i < response.result.length; i++ ) {
             countArr.push(response.result[i].count);
-            costArr.push(response.result[i].cost);
+            if ( response.result[i].cost > 0 ) {
+              costArr.push(response.result[i].cost);
+            }
           }
           $.each(countArr, function(){
             countTotal += this;
           })
           $.each(costArr, function(){
-            costTotal += this;
+              costTotal += this;
           })
+
           console.log('countTotal', countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
-          console.log('costTotal', Number(costTotal).toFixed(2));
+          console.log( 'costTotal', (costTotal/costArr.length).toFixed(2) );
         }
       });
 
@@ -62,9 +57,14 @@ $(function (){
         type: 'GET',
         dataType: 'json',
         success: function(response){
-            console.log('policies', response.result.length)
+          console.log('policies', response.result.length)
         }
       });
+
+      (function pop (){
+        $('.popUp').show()
+        $('.popUpInner').append("<p>Total Installations: " + countTotalFormatted + "</p>")
+      }())
 
     }
   })
