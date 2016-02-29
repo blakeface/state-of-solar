@@ -11,6 +11,7 @@ $(function (){
     'stateHoverAnimation': 150,
     click: function(event, data) {
 
+      // state abbreviation translator
       (function abbrState(abbr){
         var states = [
           ['Arizona', 'AZ'],
@@ -70,8 +71,7 @@ $(function (){
           if (states[j][1] == data.name) {
             stateName = (states[j][0])
           }
-          console.log(stateName);
-        }
+        };
       })()
 
       // persistence function
@@ -97,13 +97,12 @@ $(function (){
 
           $.each(countArr, function(){
             countTotal += this;
-          })
+          });
           $.each(costArr, function(){
             costTotal += this;
-          })
+          });
 
-          console.log('countTotal', countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
-          console.log( 'costTotal', (costTotal/costArr.length).toFixed(2) );
+          // pop-out function
           (function pop (){
             $('.popUp').show()
             $('.popUpInner').append("<h1>" + stateName + "</h1>")
@@ -118,9 +117,7 @@ $(function (){
         type: 'GET',
         dataType: 'json',
         success: function(response){
-          var policies = response.result.length
-          console.log('policies', response.result.length)
-          console.log('var policies', policies);
+          var policies = response.result.length;
           (function popAppend (){
             $('#popUpList').append("<li>Total Solar Policies: " + policies + "</li>")
           }())
