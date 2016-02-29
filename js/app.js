@@ -1,4 +1,9 @@
 $(function (){
+  var countArr = [];
+      costArr = [];
+      countTotal = 0;
+      costTotal = 0;
+
   $('.popUp').hide();
   $('.popUpClose').on('click', function(){
     $('.popUp').hide()
@@ -17,17 +22,7 @@ $(function (){
       //   localStorage.setItem({state: data.name, count: 1});
       // }
 
-
       // solar count & cost API
-      countArr = [];
-      costArr = [];
-
-      countTotal = 0;
-      countTotalFormatted = countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-      costTotal = 0;
-      costTotalAveraged = (costTotal/costArr.length).toFixed(2);
-
       $.ajax({
         url: 'https://developer.nrel.gov/api/solar/open_pv/installs/rankings?state='+data.name+'&api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&format=JSON',
         type: 'GET',
@@ -39,6 +34,7 @@ $(function (){
               costArr.push(response.result[i].cost);
             }
           }
+
           $.each(countArr, function(){
             countTotal += this;
           })
@@ -48,6 +44,10 @@ $(function (){
 
           console.log('countTotal', countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
           console.log( 'costTotal', (costTotal/costArr.length).toFixed(2) );
+          (function pop (){
+            $('.popUp').show()
+            $('.popUpInner').append("<p>Total Installations: " + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</p><p>Total costs: $" + (costTotal/costArr.length).toFixed(2) + "</p>")
+          }())
         }
       });
 
@@ -57,16 +57,19 @@ $(function (){
         type: 'GET',
         dataType: 'json',
         success: function(response){
+          var policies = response.result.length
           console.log('policies', response.result.length)
+          console.log('var policies', policies);
+          (function popAppend (){
+            $('.popUpInner').append("<p>Total Solar Policies: " + policies + "</p>")
+          }())
         }
       });
 
-      (function pop (){
-        $('.popUp').show()
-        $('.popUpInner').append("<p>Total Installations: " + countTotalFormatted + "</p>")
-      }())
 
     }
+
+
   })
 
 })
