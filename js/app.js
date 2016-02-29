@@ -9,6 +9,7 @@ $(function (){
     'stateStyles': {fill: '#'},
     'stateHoverStyles': {fill: '#4b70b6'},
     'stateHoverAnimation': 150,
+    'stroke': {fill: 'white'},
     click: function(event, data) {
 
       // state abbreviation translator
@@ -106,8 +107,12 @@ $(function (){
           (function pop (){
             $('.popUp').show()
             $('.popUpInner').append("<h1>" + stateName + "</h1>")
-            $('#popUpList').append("<li>Total Installations: " + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</li><li>Total costs: $" + (costTotal/costArr.length).toFixed(2) + "</li>")
+            $('#popUpList').append("<li>Total Installations: " + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</li><li>Total costs: $" + (costTotal/costArr.length).toFixed(2) + "/watt</li>")
           }())
+          // (function pop (){
+          //   $('.popUp').show();
+          //
+          // })()
         }
       });
 
@@ -130,5 +135,7 @@ $(function (){
   $('.popUpClose').on('click', function(){
     $('.popUp').hide()
   });
-
+  $('.whyHidden').hide();
+  $('#natHidden').hide();
+  $('#siteHidden').hide();
 })

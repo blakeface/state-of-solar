@@ -20,15 +20,24 @@
       <div id="clicked-state"></div>
     </div>
     <div class="info">
-      <h3><a href="#">Why it Matters</a></h3>
-      <h3><a href="#">National Stats</a></h3>
-      <h3><a href="#">Site Facts</a></h3>
+      <h3 id='ddWhy'>Why it Matters</h3>
+      <h3 id='ddNat'>National Stats</h3>
+      <h3 id='ddSite'>Site Facts</h3>
     </div>
   </div>
 
-  <div id="whyItMatters"></div>
-  <div id="nationalStats"></div>
-  <div id="siteFacts"></div>
+  <div id="Why">
+    <ul class='WhyHidden'>
+      <li class='whyHidden'></li>
+    </ul>
+  </div>
+  <div id="nat">
+    <p id="natHidden"></p>
+  </div>
+  <div id="site">
+    <p id='siteHidden'>All information listed on this site is in real-time and is sourced from NREL's OpenPV project. The OpenPV project seeds data from government agencies, PV installers, and individual contributions.</p>
+  </div>
+
 
   <div class="popUp">
     <div class="popUpInner">
