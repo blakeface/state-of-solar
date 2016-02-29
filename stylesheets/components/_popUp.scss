@@ -1,5 +1,5 @@
 .popUp {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,8 +19,13 @@
   padding: 15px;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
+}
+
+#popUpList {
+  vertical-align: text-top;
 }
 
 .popUpClose {
+  vertical-align: bottom;
 }

@@ -1,19 +1,79 @@
 $(function (){
-  var countArr = [];
-      costArr = [];
-      countTotal = 0;
-      costTotal = 0;
-
-  $('.popUp').hide();
-  $('.popUpClose').on('click', function(){
-    $('.popUp').hide()
-  });
+  var countArr = [],
+      costArr = [],
+      countTotal = 0,
+      costTotal = 0,
+      stateName;
 
   $('#map').usmap({
     'stateStyles': {fill: '#'},
     'stateHoverStyles': {fill: '#4b70b6'},
     'stateHoverAnimation': 150,
     click: function(event, data) {
+
+      (function abbrState(abbr){
+        var states = [
+          ['Arizona', 'AZ'],
+          ['Alabama', 'AL'],
+          ['Alaska', 'AK'],
+          ['Arizona', 'AZ'],
+          ['Arkansas', 'AR'],
+          ['California', 'CA'],
+          ['Colorado', 'CO'],
+          ['Connecticut', 'CT'],
+          ['Delaware', 'DE'],
+          ['Florida', 'FL'],
+          ['Georgia', 'GA'],
+          ['Hawaii', 'HI'],
+          ['Idaho', 'ID'],
+          ['Illinois', 'IL'],
+          ['Indiana', 'IN'],
+          ['Iowa', 'IA'],
+          ['Kansas', 'KS'],
+          ['Kentucky', 'KY'],
+          ['Kentucky', 'KY'],
+          ['Louisiana', 'LA'],
+          ['Maine', 'ME'],
+          ['Maryland', 'MD'],
+          ['Massachusetts', 'MA'],
+          ['Michigan', 'MI'],
+          ['Minnesota', 'MN'],
+          ['Mississippi', 'MS'],
+          ['Missouri', 'MO'],
+          ['Montana', 'MT'],
+          ['Nebraska', 'NE'],
+          ['Nevada', 'NV'],
+          ['New Hampshire', 'NH'],
+          ['New Jersey', 'NJ'],
+          ['New Mexico', 'NM'],
+          ['New York', 'NY'],
+          ['North Carolina', 'NC'],
+          ['North Dakota', 'ND'],
+          ['Ohio', 'OH'],
+          ['Oklahoma', 'OK'],
+          ['Oregon', 'OR'],
+          ['Pennsylvania', 'PA'],
+          ['Rhode Island', 'RI'],
+          ['South Carolina', 'SC'],
+          ['South Dakota', 'SD'],
+          ['Tennessee', 'TN'],
+          ['Texas', 'TX'],
+          ['Utah', 'UT'],
+          ['Vermont', 'VT'],
+          ['Virginia', 'VA'],
+          ['Washington', 'WA'],
+          ['West Virginia', 'WV'],
+          ['Wisconsin', 'WI'],
+          ['Wyoming', 'WY'],
+        ];
+        for (var j = 0; j < states.length; j++) {
+          if (states[j][1] == data.name) {
+            stateName = (states[j][0])
+          }
+          console.log(stateName);
+        }
+      })()
+
       // persistence function
       // if(localStorage.getItem(data.name)){
       //   var temp = localStorage.getItem(data.name);
@@ -39,14 +99,15 @@ $(function (){
             countTotal += this;
           })
           $.each(costArr, function(){
-              costTotal += this;
+            costTotal += this;
           })
 
           console.log('countTotal', countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") );
           console.log( 'costTotal', (costTotal/costArr.length).toFixed(2) );
           (function pop (){
             $('.popUp').show()
-            $('.popUpInner').append("<p>Total Installations: " + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</p><p>Total costs: $" + (costTotal/costArr.length).toFixed(2) + "</p>")
+            $('.popUpInner').append("<h1>" + stateName + "</h1>")
+            $('#popUpList').append("<li>Total Installations: " + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</li><li>Total costs: $" + (costTotal/costArr.length).toFixed(2) + "</li>")
           }())
         }
       });
@@ -61,15 +122,16 @@ $(function (){
           console.log('policies', response.result.length)
           console.log('var policies', policies);
           (function popAppend (){
-            $('.popUpInner').append("<p>Total Solar Policies: " + policies + "</p>")
+            $('#popUpList').append("<li>Total Solar Policies: " + policies + "</li>")
           }())
         }
       });
-
-
     }
-
-
   })
+
+  $('.popUp').hide();
+  $('.popUpClose').on('click', function(){
+    $('.popUp').hide()
+  });
 
 })
