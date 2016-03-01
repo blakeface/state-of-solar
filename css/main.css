@@ -9,7 +9,7 @@
   font-size: 50px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background: #505960; }
+  background: rgba(80, 89, 96, 0.5); }
 
 .title h3 {
   margin: 0px;
@@ -92,9 +92,7 @@ body {
   width: 100vw;
   display: flex;
   justify-content: center;
-  background: #505960;
-  padding-top: 20px;
-  padding-bottom: 25px; }
+  background: rgba(80, 89, 96, 0.5); }
 
 .info h3 {
   margin: 0px;
@@ -103,9 +101,13 @@ body {
   font-family: geosanslight;
   font-size: 30px;
   color: black;
-  margin-top: 10px;
-  margin-left: 20px;
-  margin-right: 20px; }
+  padding: 22px; }
+
+.info h3:hover {
+  background: #4670a1; }
+
+.info h3:active {
+  background: #6c232f; }
 
 .info a {
   text-decoration: none; }
@@ -117,3 +119,21 @@ body {
 
 #whyHidden ul {
   list-style-type: none; }
+
+#natHidden {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.natContainer {
+  width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; }
+
+.natCont {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center; }

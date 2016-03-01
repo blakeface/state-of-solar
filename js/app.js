@@ -11,10 +11,12 @@ $(function (){
   // hide dropdown menus and pop-up feature
   $('.pu').hide();
   $('.puClose').on('click', function(){
-    $('.pu').hide()
+    $('.pu').hide();
+    $('.puTitle').remove();
+    $('.puList').remove();
   });
   $('#whyHidden').hide();
-  $('#natHidden').hide();
+  // $('#natHidden').hide();
   $('#siteHidden').hide();
 
   // Jquery map
@@ -122,8 +124,8 @@ $(function (){
           // pop-out function
           (function pop (){
             $('.pu').show()
-            $('.puTitle').append("<h3>" + stateName + "</h3>")
-            $('#puList').append("<li>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>" + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " MW</li><li>Average Costs: $" + (costTotal/costArr.length).toFixed(2) + " / watt</li>")
+            $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>")
+            $('.puListHolder').append("<ul class='puList'><li>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Totalling " + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</li><li>Average Costs: $" + (costTotal/costArr.length).toFixed(2) + " / watt</li></ul>")
           }())
           // (function pop (){
           //   $('.popUp').show();
@@ -140,7 +142,7 @@ $(function (){
         success: function(response){
           var policies = response.result.length;
           (function popAppend (){
-            $('#puList').append("<li>" + policies + " solar policies enacted</li>")
+            $('.puList').append("<li>" + policies + " solar policies enacted</li>")
           }())
         }
       });
@@ -166,6 +168,8 @@ $(function (){
   // national stats
   $('#ddNat').on('click', function(){
     $('#natHidden').show();
+    $('#ddNat').css({'background-color': 'rgb(108, 35, 47)'});
+    $()
     $.ajax({
       url: 'https://developer.nrel.gov/api/solar/open_pv/installs/rankings?api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&format=JSON',
       type: 'GET',
@@ -173,6 +177,7 @@ $(function (){
       success: function(response){
         for (var i = 0; i < response.result.length; i++) {
           countArr.push(response.result[i].count);
+          capArr.push(response.result[i].cap);
           if ( response.result[i].cost > 0 ) {
             costArr.push(response.result[i].cost);
           }
@@ -183,8 +188,13 @@ $(function (){
         $.each(costArr, function(){
           costTotal += this;
         });
-        $('.count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal + "</h4>");
-        $('.cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + "</h4>");
+        $.each(capArr, function(){
+          capTotal += this;
+        });
+        $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal + "</h4>");
+        $('#cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + " / watt</h4>");
+        $('#cap').append("<h3>Total Capacity:</h3><h4>" + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</h4>")
+
       }
     })
     // $.ajax({
