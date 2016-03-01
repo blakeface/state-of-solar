@@ -1,0 +1,30 @@
+.info {
+  @include zerombp(0px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.info h3 {
+  @include zerombp(0px);
+  font-family: geosanslight;
+  font-size: 30px;
+  color: black;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.info a {
+  text-decoration: none;
+}
+
+.whyHidden {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whyHidden ul {
+  list-style-type: none;
+}

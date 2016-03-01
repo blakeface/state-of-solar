@@ -1,9 +1,10 @@
 $(function (){
   var countArr = [],
-      costArr = [],
-      countTotal = 0,
-      costTotal = 0,
-      stateName;
+  costArr = [],
+  countTotal = 0,
+  costTotal = 0,
+  stateName,
+  fuelArr = [];
 
   $('#map').usmap({
     'stateStyles': {fill: '#'},
@@ -133,6 +134,17 @@ $(function (){
 
   $('#ddWhy').on('click', function(event) {
     $('.whyHidden').show();
+    $.ajax({
+      url: "https://api.watttime.org/api/v1/datapoints/",
+      headers: {'authorization': 'token 1a261ce948cce77dcdb4350568f9e6065634da1d'},
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+        for (var i = 0; i < response.results.length; i++) {
+          console.log(response.results[i].carbon);
+        }
+      }
+    })
   })
 
   $('.pu').hide();
