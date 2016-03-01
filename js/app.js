@@ -105,9 +105,9 @@ $(function (){
 
           // pop-out function
           (function pop (){
-            $('.popUp').show()
-            $('.popUpInner').append("<h1>" + stateName + "</h1>")
-            $('#popUpList').append("<li>Total Installations: " + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</li><li>Total costs: $" + (costTotal/costArr.length).toFixed(2) + "/watt</li>")
+            $('.pu').show()
+            $('.puTitle').append("<h3>" + stateName + "</h3>")
+            $('#puList').append("<li>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Average Costs: $" + (costTotal/costArr.length).toFixed(2) + " / watt</li>")
           }())
           // (function pop (){
           //   $('.popUp').show();
@@ -124,16 +124,20 @@ $(function (){
         success: function(response){
           var policies = response.result.length;
           (function popAppend (){
-            $('#popUpList').append("<li>Total Solar Policies: " + policies + "</li>")
+            $('#puList').append("<li>" + policies + " solar policies enacted</li>")
           }())
         }
       });
     }
   })
 
-  $('.popUp').hide();
-  $('.popUpClose').on('click', function(){
-    $('.popUp').hide()
+  $('#ddWhy').on('click', function(event) {
+    $('.whyHidden').show();
+  })
+
+  $('.pu').hide();
+  $('.puClose').on('click', function(){
+    $('.pu').hide()
   });
   $('.whyHidden').hide();
   $('#natHidden').hide();

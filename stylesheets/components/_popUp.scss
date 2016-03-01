@@ -1,4 +1,4 @@
-.popUp {
+.pu {
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
   height: 100vh;
 }
 
-.popUpInner {
+.puContainer {
   width: 50vw;
   height: 50vh;
   background: white;
@@ -18,21 +18,30 @@
   border-radius: 50px;
   padding: 15px;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column;
+  font-family: geosanslight;
+}
+
+.puTitle h3 {
+  font-size: 50px;
+  @include zerombp(0px);
+}
+
+.puInner {
+  display: flex;
   justify-content: center;
   align-items: flex-start;
+  font-size: 20px;
 }
 
-#popUpList {
-  vertical-align: text-top;
+#puList {
+  @include zerombp(0px);
+  list-style-type: none;
+  list-style-position: inside;
 }
 
-.popUpClose {
+.puClose {
   vertical-align: bottom;
-}
-
-.expand {
-  width: 300px;
-  height: 300px;
-  background: white;
-  border: 5px solid black;
 }
