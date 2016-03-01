@@ -6,7 +6,64 @@ $(function (){
   costTotal = 0,
   capTotal = 0,
   stateName,
-  fuelArr = [];
+  clickCounter = 1,
+  lsString = JSON.stringify(localStorage),
+  lsObject = JSON.parse(lsString),
+  lsArr = [],
+  states = [
+    ['Arizona', 'AZ'],
+    ['Alabama', 'AL'],
+    ['Alaska', 'AK'],
+    ['Arizona', 'AZ'],
+    ['Arkansas', 'AR'],
+    ['California', 'CA'],
+    ['Colorado', 'CO'],
+    ['Connecticut', 'CT'],
+    ['Delaware', 'DE'],
+    ['Florida', 'FL'],
+    ['Georgia', 'GA'],
+    ['Hawaii', 'HI'],
+    ['Idaho', 'ID'],
+    ['Illinois', 'IL'],
+    ['Indiana', 'IN'],
+    ['Iowa', 'IA'],
+    ['Kansas', 'KS'],
+    ['Kentucky', 'KY'],
+    ['Kentucky', 'KY'],
+    ['Louisiana', 'LA'],
+    ['Maine', 'ME'],
+    ['Maryland', 'MD'],
+    ['Massachusetts', 'MA'],
+    ['Michigan', 'MI'],
+    ['Minnesota', 'MN'],
+    ['Mississippi', 'MS'],
+    ['Missouri', 'MO'],
+    ['Montana', 'MT'],
+    ['Nebraska', 'NE'],
+    ['Nevada', 'NV'],
+    ['New Hampshire', 'NH'],
+    ['New Jersey', 'NJ'],
+    ['New Mexico', 'NM'],
+    ['New York', 'NY'],
+    ['North Carolina', 'NC'],
+    ['North Dakota', 'ND'],
+    ['Ohio', 'OH'],
+    ['Oklahoma', 'OK'],
+    ['Oregon', 'OR'],
+    ['Pennsylvania', 'PA'],
+    ['Rhode Island', 'RI'],
+    ['South Carolina', 'SC'],
+    ['South Dakota', 'SD'],
+    ['Tennessee', 'TN'],
+    ['Texas', 'TX'],
+    ['Utah', 'UT'],
+    ['Vermont', 'VT'],
+    ['Virginia', 'VA'],
+    ['Washington', 'WA'],
+    ['West Virginia', 'WV'],
+    ['Wisconsin', 'WI'],
+    ['Wyoming', 'WY'],
+  ];
 
   // hide dropdown menus and pop-up feature
   $('.pu').hide();
@@ -29,60 +86,6 @@ $(function (){
 
       // state abbreviation translator
       (function abbrState(abbr){
-        var states = [
-          ['Arizona', 'AZ'],
-          ['Alabama', 'AL'],
-          ['Alaska', 'AK'],
-          ['Arizona', 'AZ'],
-          ['Arkansas', 'AR'],
-          ['California', 'CA'],
-          ['Colorado', 'CO'],
-          ['Connecticut', 'CT'],
-          ['Delaware', 'DE'],
-          ['Florida', 'FL'],
-          ['Georgia', 'GA'],
-          ['Hawaii', 'HI'],
-          ['Idaho', 'ID'],
-          ['Illinois', 'IL'],
-          ['Indiana', 'IN'],
-          ['Iowa', 'IA'],
-          ['Kansas', 'KS'],
-          ['Kentucky', 'KY'],
-          ['Kentucky', 'KY'],
-          ['Louisiana', 'LA'],
-          ['Maine', 'ME'],
-          ['Maryland', 'MD'],
-          ['Massachusetts', 'MA'],
-          ['Michigan', 'MI'],
-          ['Minnesota', 'MN'],
-          ['Mississippi', 'MS'],
-          ['Missouri', 'MO'],
-          ['Montana', 'MT'],
-          ['Nebraska', 'NE'],
-          ['Nevada', 'NV'],
-          ['New Hampshire', 'NH'],
-          ['New Jersey', 'NJ'],
-          ['New Mexico', 'NM'],
-          ['New York', 'NY'],
-          ['North Carolina', 'NC'],
-          ['North Dakota', 'ND'],
-          ['Ohio', 'OH'],
-          ['Oklahoma', 'OK'],
-          ['Oregon', 'OR'],
-          ['Pennsylvania', 'PA'],
-          ['Rhode Island', 'RI'],
-          ['South Carolina', 'SC'],
-          ['South Dakota', 'SD'],
-          ['Tennessee', 'TN'],
-          ['Texas', 'TX'],
-          ['Utah', 'UT'],
-          ['Vermont', 'VT'],
-          ['Virginia', 'VA'],
-          ['Washington', 'WA'],
-          ['West Virginia', 'WV'],
-          ['Wisconsin', 'WI'],
-          ['Wyoming', 'WY'],
-        ];
         for (var j = 0; j < states.length; j++) {
           if (states[j][1] == data.name) {
             stateName = (states[j][0])
@@ -91,12 +94,11 @@ $(function (){
       })()
 
       // persistence function
-      // if(localStorage.getItem(data.name)){
-      //   var temp = localStorage.getItem(data.name);
-      //   temp.count++;
-      // }else{
-      //   localStorage.setItem({state: data.name, count: 1});
-      // }
+      if ( localStorage.getItem(stateName) !== 'null'){
+        clickCount = +(localStorage.getItem(stateName)) + 1;
+        localStorage.setItem(stateName, clickCount)
+      } else localStorage.setItem(stateName, clickCounter);
+
 
       // solar count & cost API
       $.ajax({
@@ -127,10 +129,6 @@ $(function (){
             $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>")
             $('.puListHolder').append("<ul class='puList'><li>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Totalling " + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</li><li>Average Costs: $" + (costTotal/costArr.length).toFixed(2) + " / watt</li></ul>")
           }())
-          // (function pop (){
-          //   $('.popUp').show();
-          //
-          // })()
         }
       });
 
@@ -168,8 +166,8 @@ $(function (){
   // national stats
   $('#ddNat').on('click', function(){
     $('#natHidden').show();
+    document.getElementById('natHidden').scrollIntoView();
     $('#ddNat').css({'background-color': 'rgb(108, 35, 47)'});
-    $()
     $.ajax({
       url: 'https://developer.nrel.gov/api/solar/open_pv/installs/rankings?api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&format=JSON',
       type: 'GET',
@@ -194,18 +192,19 @@ $(function (){
         $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal + "</h4>");
         $('#cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + " / watt</h4>");
         $('#cap').append("<h3>Total Capacity:</h3><h4>" + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</h4>")
-
       }
     })
-    // $.ajax({
-    //   url: 'https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&address=US&technology=solar_photovoltaics',
-    //   type: 'GET',
-    //   dataType: 'json',
-    //   success: function(response){
-    //     var policies = response.result.length;
-    //     $('.policy').append("<h3>Total Solar Energy Policies Enacted Nationwide:</h3><h4>" + policies + "</h4>")
-    //   }
-    // });
-    document.getElementById('natHidden').scrollIntoView();
+  })
+
+  // site facts
+  $('#ddSite').on('click', function(){
+    $('#siteHidden').show();
+    $('.siteContainer').append("")
+    console.log('lsObject =', lsObject.Colorado);
+    console.log('states[0][0] =', states[0][0]);
+    for (var key in lsObject) {
+      $('.siteTable').append("<tr><td>" + key + "</td><td>" + lsObject[key] +"</td></tr>");
+    }
+    console.log('lsArr =', lsArr);
   })
 })
