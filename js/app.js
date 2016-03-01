@@ -1,16 +1,28 @@
 $(function (){
   var countArr = [],
   costArr = [],
+  capArr = [],
   countTotal = 0,
   costTotal = 0,
+  capTotal = 0,
   stateName,
   fuelArr = [];
 
+  // hide dropdown menus and pop-up feature
+  $('.pu').hide();
+  $('.puClose').on('click', function(){
+    $('.pu').hide()
+  });
+  $('#whyHidden').hide();
+  $('#natHidden').hide();
+  $('#siteHidden').hide();
+
+  // Jquery map
   $('#map').usmap({
     'stateStyles': {fill: '#'},
     'stateHoverStyles': {fill: '#4b70b6'},
     'stateHoverAnimation': 150,
-    'stroke': {fill: 'white'},
+    'stroke': {fill: '#ffffff'},
     click: function(event, data) {
 
       // state abbreviation translator
@@ -91,24 +103,27 @@ $(function (){
         dataType: 'json',
         success: function(response){
           for ( var i = 0; i < response.result.length; i++ ) {
+            capArr.push(response.result[i].cap);
             countArr.push(response.result[i].count);
             if ( response.result[i].cost > 0 ) {
               costArr.push(response.result[i].cost);
             }
           }
-
           $.each(countArr, function(){
             countTotal += this;
           });
           $.each(costArr, function(){
             costTotal += this;
           });
+          $.each(capArr, function(){
+            capTotal += this;
+          });
 
           // pop-out function
           (function pop (){
             $('.pu').show()
             $('.puTitle').append("<h3>" + stateName + "</h3>")
-            $('#puList').append("<li>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Average Costs: $" + (costTotal/costArr.length).toFixed(2) + " / watt</li>")
+            $('#puList').append("<li>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>" + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " MW</li><li>Average Costs: $" + (costTotal/costArr.length).toFixed(2) + " / watt</li>")
           }())
           // (function pop (){
           //   $('.popUp').show();
@@ -130,28 +145,57 @@ $(function (){
         }
       });
     }
-  })
+  });
 
+  // Why it counts
   $('#ddWhy').on('click', function(event) {
-    $('.whyHidden').show();
+    $('#whyHidden').show();
     $.ajax({
-      url: "https://api.watttime.org/api/v1/datapoints/",
+      url: "https://api.watttime.org/api/v1/fuel_carbon_intensities/",
       headers: {'authorization': 'token 1a261ce948cce77dcdb4350568f9e6065634da1d'},
       type: "GET",
       dataType: "json",
-      success: function (response) {
-        for (var i = 0; i < response.results.length; i++) {
-          console.log(response.results[i].carbon);
+      success: function(response) {
+        for (var i = 0; i < response.length; i++) {
+          console.log(response[i]);
         }
       }
     })
   })
 
-  $('.pu').hide();
-  $('.puClose').on('click', function(){
-    $('.pu').hide()
-  });
-  $('.whyHidden').hide();
-  $('#natHidden').hide();
-  $('#siteHidden').hide();
+  // national stats
+  $('#ddNat').on('click', function(){
+    $('#natHidden').show();
+    $.ajax({
+      url: 'https://developer.nrel.gov/api/solar/open_pv/installs/rankings?api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&format=JSON',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response){
+        for (var i = 0; i < response.result.length; i++) {
+          countArr.push(response.result[i].count);
+          if ( response.result[i].cost > 0 ) {
+            costArr.push(response.result[i].cost);
+          }
+        }
+        $.each(countArr, function(){
+          countTotal += this;
+        });
+        $.each(costArr, function(){
+          costTotal += this;
+        });
+        $('.count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal + "</h4>");
+        $('.cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + "</h4>");
+      }
+    })
+    // $.ajax({
+    //   url: 'https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=baBQnhHJIUy28EX60XZ2mpnTHSQ4OkRuRE6Ki4yS&address=US&technology=solar_photovoltaics',
+    //   type: 'GET',
+    //   dataType: 'json',
+    //   success: function(response){
+    //     var policies = response.result.length;
+    //     $('.policy').append("<h3>Total Solar Energy Policies Enacted Nationwide:</h3><h4>" + policies + "</h4>")
+    //   }
+    // });
+    document.getElementById('natHidden').scrollIntoView();
+  })
 })

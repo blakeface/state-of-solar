@@ -3,6 +3,9 @@
   width: 100vw;
   display: flex;
   justify-content: center;
+  background: #505960;
+  padding-top: 20px;
+  padding-bottom: 25px;
 }
 
 .info h3 {
@@ -19,12 +22,12 @@
   text-decoration: none;
 }
 
-.whyHidden {
+#whyHidden {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.whyHidden ul {
+#whyHidden ul {
   list-style-type: none;
 }
