@@ -61,6 +61,7 @@ $(function (){
     ['Vermont', 'VT'],
     ['Virginia', 'VA'],
     ['Washington', 'WA'],
+    ['Washington DC', 'DC'],
     ['West Virginia', 'WV'],
     ['Wisconsin', 'WI'],
     ['Wyoming', 'WY'],
@@ -78,13 +79,12 @@ $(function (){
   $('#siteHidden').hide();
   $('.mapContainer').hide();
 
-
-
+  // loading screen
   setTimeout(function () {
     $('.mapContainer').show();
     $('.loader').hide();
     $('.info').css({'position': 'relative', 'bottom': ''})
-  }, 4000);
+  }, 3500);
 
   // solar count, cost, capacity API
   $.getJSON('https://developer.nrel.gov/api/solar/open_pv/installs/rankings?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&format=JSON').then(function(response){
@@ -93,17 +93,29 @@ $(function (){
     }
   }).then(function(){
     for (var key in stateData) {
-      $.getJSON('https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+key+'&technology=solar_photovoltaics').then(function(response){
-        stateData[key].policies = response.result.length;
-        console.log('within for key loop', stateData[key]);
+      console.log('key', key);
+      $.ajax({
+        url: 'https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+key+'&technology=solar_photovoltaics',
+        dataType: 'JSON',
+        type: 'GET',
+        success: function(response){
+          console.log('key ', key , 'res ', response.result.length)
+          stateData[key].policies = response.result.length;
+        }.bind(this)
       })
+      // console.log('inside api for loop =', stateData);
     }
-  }).then(function(){
 
+    //   $.getJSON('https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+key+'&technology=solar_photovoltaics', function(response){
+    //     stateData[key].policies = response.result.length;
+    //     console.log('within api request =', stateData);
+    //   })
+    // }
+    console.log('outside api request =', stateData);
     // Jquery map
     $('#map').usmap({
       'stateStyles': {fill: '#'},
-      'stateHoverStyles': {fill: '#4b70b6'},
+      'stateHoverStyles': {fill: 'rgb(70, 112, 161)'},
       'stateHoverAnimation': 150,
       'stroke': {fill: '#ffffff'},
       // for (key in stateData){
@@ -132,9 +144,10 @@ $(function (){
 
         // pop-out function
         for (var key in stateData){
+          console.log('key within popup', key);
           if(data.name == key){
             (function pop (){
-              console.log('within popup function =', stateData[key]);
+              console.log('stateData[key] within popup =', stateData[key]);
               $('.pu').show();
               $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>")
               $('.puListHolder').append("<ul class='puList'><li>" + stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Totalling " + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " kW</li><li>Average Costs: $" + stateData[key].cost.toFixed(2) + " / watt</li><li>" + stateData[key].policies + " solar policies enacted</li></ul>")
@@ -149,7 +162,7 @@ $(function (){
       $('#whyHidden').show();
       $('#natHidden').hide();
       $('#siteHidden').hide();
-      $('#ddWhy').css({'background-color': 'rgba(70, 112, 161, 0.3)'});
+      $('#ddWhy').css({'background-color': '#83A3C6'});
       $('#ddSite').css({'background-color': ''});
       $('#ddNat').css({'background-color': ''});
       document.getElementById('whyHidden').scrollIntoView();
@@ -170,7 +183,7 @@ $(function (){
       $('#natHidden').show();
       $('#whyHidden').hide();
       $('#siteHidden').hide();
-      $('#ddNat').css({'background-color': 'rgba(70, 112, 161, 0.3)'});
+      $('#ddNat').css({'background-color': '#83A3C6'});
       $('#ddSite').css({'background-color': ''});
       $('#ddWhy').css({'background-color': ''});
       document.getElementById('natHidden').scrollIntoView();
@@ -184,17 +197,16 @@ $(function (){
       $('#siteHidden').show();
       $('#whyHidden').hide();
       $('#natHidden').hide();
-      $('#ddSite').css({'background-color': 'rgba(70, 112, 161, 0.3)'});
+      $('#ddSite').css({'background-color': '#83A3C6'});
       $('#ddNat').css({'background-color': ''});
       $('#ddWhy').css({'background-color': ''});
       document.getElementById('siteHidden').scrollIntoView();
       $('.siteContainer').append("")
       for (var key in lsObject) {
-        $('.siteTable').append("<tr><td>" + key + "</td><td>" + lsObject[key] +"</td></tr>");
+        $('.tableContent').append("<tr><td>" + key + "</td><td>" + lsObject[key] +"</td></tr>");
       }
     })
 
     //end of .then
   })
-
 })

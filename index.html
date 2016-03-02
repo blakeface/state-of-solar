@@ -53,12 +53,20 @@
   <!-- Site Facts -->
   <div id="siteHidden">
     <div class="siteContainer">
-      <table class='siteTable'>
-        <tr class='tableHead'>
-          <td>State</td>
-          <td>Clicks</td>
-        </tr>
-      </table>
+      <div id=tableDiv>
+        <table>
+          <tr>
+            <th id='col-1'>State</th>
+            <th>Clicks</th>
+          </tr>
+        </table>
+        <div id="table-wrapper">
+          <table>
+            <tbody class='tableContent'>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <p class='siteCont'>All information listed on this site is in real-time and is sourced from NREL's OpenPV project. The OpenPV project seeds data from government agencies, PV installers, and individuals.</p>
     </div>
   </div>
