@@ -157,6 +157,12 @@ body {
 .puClose {
   vertical-align: bottom; }
 
+.puCenter {
+  text-align: center; }
+
+#puStyle {
+  margin: 25px; }
+
 .info {
   margin: 0px;
   border: 0px;
@@ -236,7 +242,7 @@ body {
   flex-flow: column;
   align-items: center; }
 
-th {
+.siteHead {
   background: #4670a1;
   text-align: left; }
 

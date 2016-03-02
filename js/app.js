@@ -11,6 +11,12 @@ $(function (){
   lsObject = JSON.parse(lsString),
   lsArr = [],
   stateData = {},
+  sortCost = [],
+  sortCount = [],
+  sortCap = [],
+  costRanking,
+  capRanking,
+  countRanking,
   states = [
     ['Arizona', 'AZ'],
     ['Alabama', 'AL'],
@@ -72,7 +78,7 @@ $(function (){
   $('.puClose').on('click', function(){
     $('.pu').hide();
     $('.puTitle').remove();
-    $('.puList').remove();
+    $('.rowRemove').remove();
   });
   $('#whyHidden').hide();
   // $('#natHidden').hide();
@@ -92,49 +98,54 @@ $(function (){
       stateData[response.result[i].name] = {count: response.result[i].count, cap: response.result[i].count, cost: response.result[i].cost}
     }
   }).then(function(){
-    for (var key in stateData) {
-      console.log('key', key);
-      $.ajax({
-        url: 'https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+key+'&technology=solar_photovoltaics',
-        dataType: 'JSON',
-        type: 'GET',
-        success: function(response){
-          console.log('key ', key , 'res ', response.result.length)
-          stateData[key].policies = response.result.length;
-        }.bind(this)
-      })
-      // console.log('inside api for loop =', stateData);
+
+    //sorting feature
+    for ( var key in stateData ) {
+      sortCount.push([key, stateData[key].count])
+      sortCount.sort(function(a, b){
+        return b[1] - a[1]
+      });
+      sortCost.push([key, stateData[key].cost])
+      sortCost.sort(function(a, b){
+        return b[1] - a[1]
+      });
+      sortCap.push([key, stateData[key].cap])
+      sortCap.sort(function(a, b){
+        return b[1] - a[1]
+      });
     }
 
-    //   $.getJSON('https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+key+'&technology=solar_photovoltaics', function(response){
-    //     stateData[key].policies = response.result.length;
-    //     console.log('within api request =', stateData);
-    //   })
-    // }
-    console.log('outside api request =', stateData);
     // Jquery map
     $('#map').usmap({
       'stateStyles': {fill: '#'},
       'stateHoverStyles': {fill: 'rgb(70, 112, 161)'},
       'stateHoverAnimation': 150,
       'stroke': {fill: '#ffffff'},
-      // for (key in stateData){
-      //   if ( stateData[key].count > 100) {
-      //     'stateSpecificStyles': {
-      //       stateData[key]: {fill: 'yellow'}
-      //     }
-      //   }
-      // },
       click: function(event, data) {
 
         // state abbreviation translator
         (function abbrState(abbr){
           for (var j = 0; j < states.length; j++) {
-            if (states[j][1] == data.name) {
-              stateName = (states[j][0])
-            }
+            if (states[j][1] == data.name) stateName = (states[j][0])
           };
         })()
+
+        // sorting function
+        function costRank () {
+          for (var i = 0; i < sortCost.length; i++) {
+            if ( sortCost[i][0] == data.name ) costRanking = i + 1;
+          }
+        }
+        function capRank () {
+          for (var i = 0; i < sortCap.length; i++) {
+            if ( sortCap[i][0] == data.name ) capRanking = i + 1;
+          }
+        }
+        function countRank () {
+          for (var i = 0; i < sortCount.length; i++) {
+            if ( sortCount[i][0] == data.name ) countRanking = i + 1;
+          }
+        }
 
         // persistence function
         if ( localStorage.getItem(stateName) !== 'null'){
@@ -143,19 +154,29 @@ $(function (){
         } else localStorage.setItem(stateName, clickCounter);
 
         // pop-out function
-        for (var key in stateData){
-          console.log('key within popup', key);
-          if(data.name == key){
-            (function pop (){
-              console.log('stateData[key] within popup =', stateData[key]);
-              $('.pu').show();
-              $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>")
-              $('.puListHolder').append("<ul class='puList'><li>" + stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Totalling " + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " kW</li><li>Average Costs: $" + stateData[key].cost.toFixed(2) + " / watt</li><li>" + stateData[key].policies + " solar policies enacted</li></ul>")
-            }())
+        $.ajax({
+          url: 'https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+data.name+'&technology=solar_photovoltaics',
+          dataType: 'JSON',
+          type: 'GET',
+          success: function(response){
+            stateData[data.name].policies = response.result.length;
+          },
+        }).then(function(){
+          countRank(data.name);
+          capRank(data.name);
+          costRank(data.name);
+          for (var key in stateData){
+            if(data.name == key){
+              (function pop (){
+                $('.pu').show();
+                $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>");
+                $('.puTable').append("<tr class='rowRemove'><td class='rowRemove'>" + stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Systems Installed</td><td class='puCenter rowRemove'>" + countRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove'>" + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW Capacity</td><td class='puCenter rowRemove'>" + capRanking + "</td></tr class='rowRemove'><tr><td class='rowRemove'>Avg. Cost: $" + stateData[key].cost.toFixed(2) + " / watt</td><td class='puCenter rowRemove'>" + costRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove' colspan=2>" + stateData[key].policies + " Solar Policies Enacted</td></tr>")
+              }())
+            }
           }
-        }
+        })
       }
-    });
+    })
 
     // Why it matters
     $('#ddWhy').on('click', function(event) {
