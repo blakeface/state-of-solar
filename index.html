@@ -10,14 +10,22 @@
   <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
+  <!-- header -->
   <div class='title'>
     <h3>The State of Solar</h3>
   </div>
 
+  <!-- map -->
   <div class="container">
+    <div class="loader">Loading...</div>
     <div class="mapContainer">
-      <div id="map" style="height: 450px; width: 700px;"></div>
-      <div id="clicked-state"></div>
+      <div id="description">
+        <p>click a state to view its performance in deploying solar energy</p>
+      </div>
+      <div class="map">  
+        <div id="map" style="height: 450px; width: 700px;"></div>
+        <div id="clicked-state"></div>
+      </div>
     </div>
     <div class="info">
       <a href='#whyHidden' id='ddWhy'><h3>Why it Matters</h3></a>
