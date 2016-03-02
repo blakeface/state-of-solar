@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   background: rgba(80, 89, 96, 0.5);
+  position: fixed;
+  bottom: 0px;
 }
 
 .info h3 {
@@ -15,11 +17,11 @@
 }
 
 .info h3:hover {
-  background: rgb(70, 112, 161)
+  background: rgb(70, 112, 161);
 }
 
 .info h3:active {
-  background: rgb(108, 35, 47)
+  background: rgb(70, 112, 161);
 }
 
 .info a {
@@ -31,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(70, 112, 161, 0.5);
 }
 
 #whyHidden ul {
@@ -43,6 +46,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(70, 112, 161, 0.5);
 }
 
 .natContainer {
@@ -65,6 +69,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(70, 112, 161, 0.5);
 }
 
 .siteContainer {

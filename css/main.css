@@ -34,8 +34,9 @@
 
 .map {
   display: flex;
-  flex-direction: row;
-  align-items: center; }
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
 
 .description {
   margin: 0px;
@@ -45,7 +46,8 @@
   justify-content: center; }
 
 p {
-  font-size: 20px; }
+  font-size: 20px;
+  font-family: geoSansLight; }
 
 body {
   margin: 0px;
@@ -53,8 +55,7 @@ body {
   padding: 0px;
   background-image: url("../images/sun.jpg");
   background-position: top;
-  background-size: cover;
-  font-family: geoSansLight; }
+  background-size: cover; }
 
 .loader,
 .loader:before,
@@ -163,7 +164,9 @@ body {
   width: 100vw;
   display: flex;
   justify-content: center;
-  background: rgba(80, 89, 96, 0.5); }
+  background: rgba(80, 89, 96, 0.5);
+  position: fixed;
+  bottom: 0px; }
 
 .info h3 {
   margin: 0px;
@@ -178,7 +181,7 @@ body {
   background: #4670a1; }
 
 .info h3:active {
-  background: #6c232f; }
+  background: #4670a1; }
 
 .info a {
   text-decoration: none; }
@@ -187,7 +190,8 @@ body {
   font-family: geosanslight;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  background: rgba(70, 112, 161, 0.5); }
 
 #whyHidden ul {
   list-style-type: none; }
@@ -197,7 +201,8 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  background: rgba(70, 112, 161, 0.5); }
 
 .natContainer {
   width: 700px;
@@ -216,7 +221,8 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  background: rgba(70, 112, 161, 0.5); }
 
 .siteContainer {
   width: 700px;

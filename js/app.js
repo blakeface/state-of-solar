@@ -78,10 +78,13 @@ $(function (){
   $('#siteHidden').hide();
   $('.mapContainer').hide();
 
+
+
   setTimeout(function () {
     $('.mapContainer').show();
     $('.loader').hide();
-  }, 5000);
+    $('.info').css({'position': 'relative', 'bottom': ''})
+  }, 4000);
 
   // solar count, cost, capacity API
   $.getJSON('https://developer.nrel.gov/api/solar/open_pv/installs/rankings?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&format=JSON').then(function(response){
@@ -92,16 +95,24 @@ $(function (){
     for (var key in stateData) {
       $.getJSON('https://developer.nrel.gov/api/energy_incentives/v2/dsire.json?api_key=zRvnoStLNlMEuI4UIT0hyYzDa5j3p83JKfaVTbKs&address='+key+'&technology=solar_photovoltaics').then(function(response){
         stateData[key].policies = response.result.length;
-        console.log(stateData[key]);
+        console.log('within for key loop', stateData[key]);
       })
     }
   }).then(function(){
+
     // Jquery map
     $('#map').usmap({
       'stateStyles': {fill: '#'},
       'stateHoverStyles': {fill: '#4b70b6'},
       'stateHoverAnimation': 150,
       'stroke': {fill: '#ffffff'},
+      // for (key in stateData){
+      //   if ( stateData[key].count > 100) {
+      //     'stateSpecificStyles': {
+      //       stateData[key]: {fill: 'yellow'}
+      //     }
+      //   }
+      // },
       click: function(event, data) {
 
         // state abbreviation translator
@@ -123,7 +134,7 @@ $(function (){
         for (var key in stateData){
           if(data.name == key){
             (function pop (){
-              console.log(stateData[key]);
+              console.log('within popup function =', stateData[key]);
               $('.pu').show();
               $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>")
               $('.puListHolder').append("<ul class='puList'><li>" + stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " systems installed</li><li>Totalling " + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " kW</li><li>Average Costs: $" + stateData[key].cost.toFixed(2) + " / watt</li><li>" + stateData[key].policies + " solar policies enacted</li></ul>")
@@ -136,6 +147,11 @@ $(function (){
     // Why it matters
     $('#ddWhy').on('click', function(event) {
       $('#whyHidden').show();
+      $('#natHidden').hide();
+      $('#siteHidden').hide();
+      $('#ddWhy').css({'background-color': 'rgba(70, 112, 161, 0.3)'});
+      $('#ddSite').css({'background-color': ''});
+      $('#ddNat').css({'background-color': ''});
       document.getElementById('whyHidden').scrollIntoView();
       $.ajax({
         url: "https://api.watttime.org/api/v1/datapoints/",
@@ -152,16 +168,25 @@ $(function (){
     // national stats
     $('#ddNat').on('click', function(){
       $('#natHidden').show();
+      $('#whyHidden').hide();
+      $('#siteHidden').hide();
+      $('#ddNat').css({'background-color': 'rgba(70, 112, 161, 0.3)'});
+      $('#ddSite').css({'background-color': ''});
+      $('#ddWhy').css({'background-color': ''});
       document.getElementById('natHidden').scrollIntoView();
-      $('#ddNat').css({'background-color': 'rgb(108, 35, 47)'});
-      $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal + "</h4>");
-      $('#cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + " / watt</h4>");
-      $('#cap').append("<h3>Total Capacity:</h3><h4>" + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</h4>");
+      $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + stateData[key].count + "</h4>");
+      $('#cost').append("<h3>Average National Costs:</h3><h4>$" + stateData[key].cost.toFixed(2) + " / watt</h4>");
+      $('#cap').append("<h3>Total Capacity:</h3><h4>" + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</h4>");
     })
 
     // site facts
     $('#ddSite').on('click', function(){
       $('#siteHidden').show();
+      $('#whyHidden').hide();
+      $('#natHidden').hide();
+      $('#ddSite').css({'background-color': 'rgba(70, 112, 161, 0.3)'});
+      $('#ddNat').css({'background-color': ''});
+      $('#ddWhy').css({'background-color': ''});
       document.getElementById('siteHidden').scrollIntoView();
       $('.siteContainer').append("")
       for (var key in lsObject) {
