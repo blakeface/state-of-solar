@@ -1,0 +1,23 @@
+#siteHidden {
+  font-family: geosanslight;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px;
+}
+
+.siteContainer {
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+}
+
+.siteCont {
+  margin-top: 15px;
+  padding-left: 15px;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+}

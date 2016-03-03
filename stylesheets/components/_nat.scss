@@ -1,0 +1,77 @@
+#natHidden {
+  font-family: geosanslight;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+  background: rgba(70, 112, 161, 0.5);
+}
+
+.natContainer {
+  width: 700px;
+  display: flex;
+}
+
+.natCont {
+  display: flex;
+  flex-flow: column;
+  font-size: 20px;
+}
+
+.natCont h3 {
+  @include zerombp(0px);
+  font-weight: bold;
+  text-align: center;
+}
+
+.natCont h4 {
+  @include zerombp(0px);
+  font-weight: 300;
+  text-align: center;
+}
+
+#natSide {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.natTable {
+  width: 500px;
+}
+
+.natTbWrapper {
+  height: 350px;
+  width: 500px;
+  overflow: scroll;
+  position: relative;
+}
+
+#nat-col-1{
+  width: 15%;
+}
+
+.nat-col-2{
+  width: 30%;
+}
+
+.nat-col-3{
+  width: 25%
+}
+
+hr {
+  width: 60%;
+}
+
+.infoHead {
+  background: rgb(70, 112, 161);
+  text-align: left;
+}
+
+.infoHead a {
+  text-decoration: none;
+  color: black;
+}
