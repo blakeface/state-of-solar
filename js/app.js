@@ -124,16 +124,15 @@ $(function (){
       // create national stats table
       $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + key + "</td><td class='rowRemove'>" + keyCount + "</td><td class='rowRemove'>" + keyCap + "</td><td class='rowRemove'>" + keyCost + "</td></tr class='rowRemove'>")
 
-
       // by count
       $('.countButton').on('click',function(){
         $('.rowRemove').remove();
         stateArr.sort(function(a, b){
           return b[1] - a[1];
-          for (var i = 0; i < stateArr.length; i++) {
-            $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1] + "</td><td class='rowRemove'>" + stateArr[i][2] + "</td><td class='rowRemove'>" + stateArr[i][3] + "</td></tr>")
-          }
         })
+        for (var i = 0; i < stateArr.length; i++) {
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+        }
       })
 
       // by cap
@@ -141,10 +140,10 @@ $(function (){
         $('.rowRemove').remove();
         stateArr.sort(function(a, b){
           return b[2] - a[2];
-        for (var i = 0; i < stateArr.length; i++) {
-          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1] + "</td><td class='rowRemove'>" + stateArr[i][2] + "</td><td class='rowRemove'>" + stateArr[i][3] + "</td></tr>")
-          }
         })
+        for (var i = 0; i < stateArr.length; i++) {
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+        }
       })
 
       // by cost
@@ -152,13 +151,23 @@ $(function (){
         $('.rowRemove').remove();
         stateArr.sort(function(a, b){
           return b[3] - a[3];
-          for (var i = 0; i < stateArr.length; i++) {
-            $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1] + "</td><td class='rowRemove'>" + stateArr[i][2] + "</td><td class='rowRemove'>" + stateArr[i][3] + "</td></tr>")
-          }
         })
+        for (var i = 0; i < stateArr.length; i++) {
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+        }
       })
 
+      // by state
+      $('.stateButton').on('click',function(){
+        $('.rowRemove').remove();
+        stateArr.sort();
+        for (var i = 0; i < stateArr.length; i++) {
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+        }
+      })
     }
+
+
     // load national averages}
     $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</h4>");
     $('#cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + " / watt</h4>");
