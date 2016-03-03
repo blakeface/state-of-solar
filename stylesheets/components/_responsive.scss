@@ -59,7 +59,7 @@
   }
 
   .siteContainer {
-    width: 480;
+    width: 480px;
     font-size: 15px;
     display: flex;
     flex-direction: column;
@@ -69,8 +69,9 @@
 }
 
 @media only screen and (max-width: 320px) {
+
   .title h3 {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .info h3 {
@@ -78,7 +79,7 @@
   }
 
   .natContainer {
-    width: 320px;
+    width: 3200px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -87,11 +88,37 @@
   #natSide {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    height: auto;
+    font-size: 12px;
+    width: 3200px;
   }
 
   hr {
-    height: 20px;
     width: auto;
+    height: auto;
+  }
+
+  .natCont {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    }
+
+  .natTable {
+    width: 320px;
+    font-size: 12px;
+  }
+
+  .tableDiv {
+    font-size: 12px;
+  }
+
+  .siteContainer {
+    width: 4320px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
