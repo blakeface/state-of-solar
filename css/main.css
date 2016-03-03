@@ -125,12 +125,12 @@ body {
 .puContainer {
   width: 50vw;
   height: 50vh;
-  background: white;
-  border: 5px solid black;
+  background: rgba(255, 255, 255, 0.8);
+  border: 5px solid rgba(0, 0, 0, 0.8);
   border-radius: 50px;
   padding: 15px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-flow: column;
   font-family: geosanslight; }
@@ -161,7 +161,7 @@ body {
   text-align: center; }
 
 #puStyle {
-  margin: 25px; }
+  margin-bottom: 40px; }
 
 .info {
   margin: 0px;
@@ -197,7 +197,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(70, 112, 161, 0.5); }
+  background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px; }
 
 #whyHidden ul {
   list-style-type: none; }
@@ -208,7 +209,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(70, 112, 161, 0.5); }
+  background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px; }
 
 .natContainer {
   width: 700px;
@@ -228,7 +230,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(70, 112, 161, 0.5); }
+  background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px; }
 
 .siteContainer {
   width: 700px;
@@ -250,11 +253,20 @@ table {
   width: 350px;
   font-size: 20px; }
 
-#table-wrapper {
+.table-wrapper {
   height: 350px;
   width: 350px;
   overflow: scroll;
   position: relative; }
+
+.natTbWrapper {
+  height: 350px;
+  width: 500px;
+  overflow: scroll;
+  position: relative; }
+
+.natTable {
+  width: 500px; }
 
 td {
   border-bottom: 1px solid #ddd; }
@@ -262,5 +274,10 @@ td {
 #col-1 {
   width: 75%; }
 
-#tableDiv {
+.tableDiv {
   margin-top: 15px; }
+
+#natSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }

@@ -34,6 +34,7 @@
   align-items: center;
   justify-content: center;
   background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px;
 }
 
 #whyHidden ul {
@@ -47,6 +48,7 @@
   align-items: center;
   justify-content: center;
   background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px;
 }
 
 .natContainer {
@@ -70,6 +72,7 @@
   align-items: center;
   justify-content: center;
   background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px;
 }
 
 .siteContainer {
@@ -96,11 +99,22 @@ table {
   font-size: 20px;
 }
 
-#table-wrapper {
+.table-wrapper {
   height: 350px;
   width: 350px;
   overflow: scroll;
   position: relative;
+}
+
+.natTbWrapper {
+  height: 350px;
+  width: 500px;
+  overflow: scroll;
+  position: relative;
+}
+
+.natTable {
+  width: 500px;
 }
 
 td {
@@ -111,6 +125,12 @@ td {
   width: 75%;
 }
 
-#tableDiv {
+.tableDiv {
   margin-top: 15px;
+}
+
+#natSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

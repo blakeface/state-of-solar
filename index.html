@@ -44,23 +44,41 @@
   <!-- National Stats -->
   <div id="natHidden">
     <div class="natContainer">
-      <div class="natCont" id="count"></div>
-      <div class="natCont" id="cost"></div>
-      <div class="natCont" id="cap"></div>
+      <div id="natSide">
+        <div class="natCont" id="count"></div>
+        <div class="natCont" id="cost"></div>
+        <div class="natCont" id="cap"></div>
+      </div>
+      <div class='tableDiv'>
+        <table class='natTable'>
+          <tr>
+            <th>State</th>
+            <th>Installations</th>
+            <th>Capacity (kW)</th>
+            <th>Avg. Costs ($/W)</th>
+          </tr>
+        </table>
+        <div class="natTbWrapper">
+          <table class='natTable'>
+            <tbody class='natTbTarget'>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Site Facts -->
   <div id="siteHidden">
     <div class="siteContainer">
-      <div id=tableDiv>
+      <div class=tableDiv>
         <table>
           <tr>
             <th class='siteHead' id='col-1'>State</th>
             <th class='siteHead'>Clicks</th>
           </tr>
         </table>
-        <div id="table-wrapper">
+        <div class="table-wrapper">
           <table>
             <tbody class='tableContent'>
             </tbody>
