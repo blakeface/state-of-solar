@@ -134,7 +134,8 @@ body {
   flex-flow: column;
   font-family: geosanslight;
   overflow: scroll;
-  min-width: 415px; }
+  min-width: 415px;
+  min-height: 250px; }
 
 .puTitle h3 {
   font-size: 50px;
