@@ -22,6 +22,8 @@
   align-items: center;
   flex-flow: column;
   font-family: geosanslight;
+  overflow: scroll;
+  min-width: 415px;
 }
 
 .puTitle h3 {

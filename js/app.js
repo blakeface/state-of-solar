@@ -4,8 +4,10 @@ $(function (){
   capTotal = 0,
   stateName,
   clickCounter = 1,
+  clickVerifier = 0,
   lsString = JSON.stringify(localStorage),
   lsObject = JSON.parse(lsString),
+  lsArr = [],
   stateData = {},
   costArr = [],
   countArr = [],
@@ -79,6 +81,7 @@ $(function (){
     $('.pu').hide();
     $('.puTitle').remove();
     $('.rowRemove').remove();
+    clickVerifier = 0;
   });
   $('#whyHidden').hide();
   $('#natHidden').hide();
@@ -122,8 +125,7 @@ $(function (){
       costTotal += stateData[key].cost;
       capTotal += stateData[key].cap;
       // create national stats table
-      $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + key + "</td><td class='rowRemove'>" + keyCount + "</td><td class='rowRemove'>" + keyCap + "</td><td class='rowRemove'>" + keyCost + "</td></tr class='rowRemove'>")
-
+      $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove' id='nat-col-1'>" + key + "</td><td class='rowRemove nat-col-3'>" + keyCount + "</td><td class='rowRemove nat-col-2'>" + keyCap + "</td><td class='rowRemove nat-col-2'>" + keyCost + "</td></tr>")
       // by count
       $('.countButton').on('click',function(){
         $('.rowRemove').remove();
@@ -131,10 +133,9 @@ $(function (){
           return b[1] - a[1];
         })
         for (var i = 0; i < stateArr.length; i++) {
-          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove' id='nat-col-1'>" + stateArr[i][0] + "</td><td class='rowRemove nat-col-3'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
         }
       })
-
       // by cap
       $('.capButton').on('click',function(){
         $('.rowRemove').remove();
@@ -142,10 +143,9 @@ $(function (){
           return b[2] - a[2];
         })
         for (var i = 0; i < stateArr.length; i++) {
-          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove' id='nat-col-1'>" + stateArr[i][0] + "</td><td class='rowRemove nat-col-3'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
         }
       })
-
       // by cost
       $('.costButton').on('click',function(){
         $('.rowRemove').remove();
@@ -153,20 +153,18 @@ $(function (){
           return b[3] - a[3];
         })
         for (var i = 0; i < stateArr.length; i++) {
-          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove' id='nat-col-1'>" + stateArr[i][0] + "</td><td class='rowRemove nat-col-3'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
         }
       })
-
       // by state
       $('.stateButton').on('click',function(){
         $('.rowRemove').remove();
         stateArr.sort();
         for (var i = 0; i < stateArr.length; i++) {
-          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove' id='nat-col-1'>" + stateArr[i][0] + "</td><td class='rowRemove nat-col-3'>" + stateArr[i][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][2].toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td class='rowRemove nat-col-2'>" + stateArr[i][3].toFixed(2) + "</td></tr>")
         }
       })
     }
-
 
     // load national averages}
     $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</h4>");
@@ -180,6 +178,8 @@ $(function (){
       'stateHoverAnimation': 150,
       'stroke': {fill: '#ffffff'},
       click: function(event, data) {
+        clickVerifier++;
+        console.log(clickVerifier);
 
         // state abbreviation translator
         (function abbrState(abbr){
@@ -223,16 +223,22 @@ $(function (){
           countRank(data.name);
           capRank(data.name);
           costRank(data.name);
-          for (var key in stateData){
+          for (var key in stateData) {
             keyCount = stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             keyCap = stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             keyCost = stateData[key].cost.toFixed(2);
-            if(data.name == key){
-              (function pop (){
-                $('.pu').show();
-                $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>");
-                $('.puTable').append("<tr class='rowRemove'><td class='rowRemove'>" + keyCount + " Systems Installed</td><td class='puCenter rowRemove'>" + countRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove'>" + keyCap + " kW Capacity</td><td class='puCenter rowRemove'>" + capRanking + "</td></tr class='rowRemove'><tr><td class='rowRemove'>Avg. Cost: $" + keyCost + " / watt</td><td class='puCenter rowRemove'>" + costRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove' colspan=2>" + stateData[key].policies + " Solar Policies Enacted</td></tr>")
-              }())
+
+            if ( clickVerifier >! 1 ) {
+              if(data.name == key){
+                (function pop (){
+                  $('.pu').show();
+                  $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>");
+                  $('.puTable').append("<tr class='rowRemove'><td class='rowRemove'>" + keyCount + " Systems Installed</td><td class='puCenter rowRemove'>" + countRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove'>" + keyCap + " kW Capacity</td><td class='puCenter rowRemove'>" + capRanking + "</td></tr class='rowRemove'><tr><td class='rowRemove'>Avg. Cost: $" + keyCost + " / watt</td><td class='puCenter rowRemove'>" + costRanking + "</td></tr>");
+                  if (typeof stateData[key].policies == 'number') {
+                    $('.puTable').append("<tr class='rowRemove'><td class='rowRemove' colspan=2>" + stateData[key].policies + " Solar Policies Enacted</td></tr>")
+                  }
+                }())
+              };
             }
           }
         })
@@ -282,8 +288,30 @@ $(function (){
       document.getElementById('siteHidden').scrollIntoView();
       $('.siteContainer').append("")
       for (var key in lsObject) {
-        $('.tableContent').append("<tr><td>" + key + "</td><td>" + lsObject[key] +"</td></tr>");
+        $('.tableContent').append("<tr class='rowRemove'><td class='rowRemove' id='col-1'>" + key + "</td><td class='rowRemove'>" + lsObject[key] + "</td></tr>");
+        lsArr.push([key, lsObject[key]])
       }
+
+      // state sort
+      $('#infoStateButt').on('click', function(){
+        $('.rowRemove').remove();
+        lsArr.sort();
+        for (var i = 0; i < lsArr.length; i++) {
+          $('.tableContent').append("<tr class='rowRemove'><td class='rowRemove' id='col-1'>" + lsArr[i][0] + "</td><td class='rowRemove'>" + lsArr[i][1] + "</td></tr>");
+        }
+        console.log(lsArr);
+      })
+
+      // click sort
+      $('#infoClickButt').on('click', function(){
+        $('.rowRemove').remove();
+        lsArr.sort(function(a, b){
+          return b[1] - a[1];
+        });
+        for (var i = 0; i < lsArr.length; i++) {
+          $('.tableContent').append("<tr class='rowRemove'><td class='rowRemove' id='col-1'>" + lsArr[i][0] + "</td><td class='rowRemove'>" + lsArr[i][1] + "</td></tr>");
+        }
+      })
     })
 
     //end of .then

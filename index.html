@@ -28,17 +28,23 @@
       </div>
     </div>
     <div class="info">
-      <a href='#whyHidden' id='ddWhy'><h3>Why it Matters</h3></a>
       <a href='#natHidden' id='ddNat'><h3>National Stats</h3></a>
       <a href='#siteHidden' id='ddSite'><h3>Site Facts</h3></a>
+      <a href='#whyHidden' id='ddWhy'><h3>Why it Matters</h3></a>
     </div>
   </div>
 
   <!-- Why it Matters -->
   <div id="whyHidden">
-    <ul>
-      <li></li>
-    </ul>
+    <div class="whyContainer">
+      <div id="carbon">
+
+      </div>
+      <id id="">
+
+      </id>
+      <iframe id="eia_widget" style="width:700px;height:400px;font-family:geosanslight" src="http://www.eia.gov/opendata/embed/iframe.php?series_id=ELEC.GEN.COW-US-99.Q;ELEC.GEN.NG-US-99.Q;ELEC.GEN.NUC-US-99.Q;ELEC.GEN.HYC-US-99.Q;ELEC.GEN.WND-US-99.Q;ELEC.GEN.TSN-US-99.Q&periods=16Q" load="iframe_load"></iframe>
+    </div>
   </div>
 
   <!-- National Stats -->
@@ -46,16 +52,18 @@
     <div class="natContainer">
       <div id="natSide">
         <div class="natCont" id="count"></div>
+        <hr>
         <div class="natCont" id="cost"></div>
+        <hr>
         <div class="natCont" id="cap"></div>
       </div>
       <div class='tableDiv'>
         <table class='natTable'>
           <tr>
-            <th class='infoHead headCenter'><a href='#natHidden' class='stateButton'>State</a></th>
-            <th class='infoHead headCenter'><a href='#natHidden' class='countButton'>Installations</a></th>
-            <th class='infoHead headCenter'><a href='#natHidden' class='capButton'>Capacity (kW)</a></th>
-            <th class='infoHead headCenter'><a href='#natHidden' class='costButton'>Avg. Costs ($/W)</a></th>
+            <th class='infoHead headCenter' id='nat-col-1'><a href='#natHidden' class='stateButton'>State</a></th>
+            <th class='infoHead headCenter nat-col-3'><a href='#natHidden' class='countButton'>Installations</a></th>
+            <th class='infoHead headCenter nat-col-2'><a href='#natHidden' class='capButton'>Capacity (kW)</a></th>
+            <th class='infoHead headCenter nat-col-2'><a href='#natHidden' class='costButton'>Avg. Costs ($/W)</a></th>
           </tr>
         </table>
         <div class="natTbWrapper">
@@ -75,8 +83,8 @@
       <div class=tableDiv>
         <table>
           <tr>
-            <th class='infoHead' id='col-1'>State</th>
-            <th class='infoHead'>Clicks</th>
+            <th class='infoHead' id='col-1'><a href='#siteHidden' id='infoStateButt'>State</a></th>
+            <th class='infoHead'><a href='#siteHidden' id='infoClickButt'>Clicks</a></th>
           </tr>
         </table>
         <div class="table-wrapper">
@@ -103,7 +111,6 @@
 
         </tbody>
       </table>
-      <!-- <div class="puListHolder"></div> -->
       <div class="puClose">
         <a href="#">CLOSE</a>
       </div>

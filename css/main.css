@@ -133,7 +133,9 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-flow: column;
-  font-family: geosanslight; }
+  font-family: geosanslight;
+  overflow: scroll;
+  min-width: 415px; }
 
 .puTitle h3 {
   font-size: 50px;
@@ -195,16 +197,27 @@ body {
 .info a {
   text-decoration: none; }
 
-#whyHidden {
-  font-family: geosanslight;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(70, 112, 161, 0.5);
-  padding-bottom: 50px; }
+table {
+  width: 350px;
+  font-size: 20px; }
 
-#whyHidden ul {
-  list-style-type: none; }
+.table-wrapper {
+  height: 350px;
+  width: 350px;
+  overflow: scroll;
+  position: relative; }
+
+td {
+  border-bottom: 1px solid #ddd; }
+
+#col-1 {
+  width: 75%; }
+
+.tableDiv {
+  margin-top: 15px; }
+
+.headCenter {
+  text-align: center; }
 
 #natHidden {
   font-family: geosanslight;
@@ -212,20 +225,67 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(70, 112, 161, 0.5);
-  padding-bottom: 50px; }
+  padding-bottom: 50px;
+  background: rgba(70, 112, 161, 0.5); }
 
 .natContainer {
   width: 700px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around; }
+  display: flex; }
 
 .natCont {
   display: flex;
-  justify-content: center;
   flex-flow: column;
-  align-items: center; }
+  font-size: 20px; }
+
+.natCont h3 {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  font-weight: bold;
+  text-align: center; }
+
+.natCont h4 {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  font-weight: 300;
+  text-align: center; }
+
+#natSide {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  justify-content: space-around;
+  margin-top: 15px; }
+
+.natTable {
+  width: 500px; }
+
+.natTbWrapper {
+  height: 350px;
+  width: 500px;
+  overflow: scroll;
+  position: relative; }
+
+#nat-col-1 {
+  width: 15%; }
+
+.nat-col-2 {
+  width: 30%; }
+
+.nat-col-3 {
+  width: 25%; }
+
+hr {
+  width: 60%; }
+
+.infoHead {
+  background: #4670a1;
+  text-align: left; }
+
+.infoHead a {
+  text-decoration: none;
+  color: black; }
 
 #siteHidden {
   font-family: geosanslight;
@@ -248,46 +308,22 @@ body {
   flex-flow: column;
   align-items: center; }
 
-.infoHead {
-  background: #4670a1;
-  text-align: left; }
-
-.infoHead a {
-  text-decoration: none;
-  color: black; }
-
-table {
-  width: 350px;
-  font-size: 20px; }
-
-.table-wrapper {
-  height: 350px;
-  width: 350px;
-  overflow: scroll;
-  position: relative; }
-
-.natTbWrapper {
-  height: 350px;
-  width: 500px;
-  overflow: scroll;
-  position: relative; }
-
-.natTable {
-  width: 500px; }
-
-td {
-  border-bottom: 1px solid #ddd; }
-
-#col-1 {
-  width: 75%; }
-
-.tableDiv {
-  margin-top: 15px; }
-
-#natSide {
+#whyHidden {
+  font-family: geosanslight;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; }
+  align-items: center;
+  justify-content: center;
+  background: rgba(70, 112, 161, 0.5);
+  padding-bottom: 50px; }
 
-.headCenter {
-  text-align: center; }
+.whyContainer {
+  margin-top: 15px;
+  width: 700px;
+  display: flex;
+  align-items: center; }
+
+#ie_widget {
+  width: 700px; }
+
+.eia-visualization {
+  font-family: geosanslight; }

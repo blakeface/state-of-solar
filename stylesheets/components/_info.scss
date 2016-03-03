@@ -28,77 +28,6 @@
   text-decoration: none;
 }
 
-#whyHidden {
-  font-family: geosanslight;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(70, 112, 161, 0.5);
-  padding-bottom: 50px;
-}
-
-#whyHidden ul {
-  list-style-type: none;
-}
-
-#natHidden {
-  font-family: geosanslight;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(70, 112, 161, 0.5);
-  padding-bottom: 50px;
-}
-
-.natContainer {
-  width: 700px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.natCont {
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
-  align-items: center;
-}
-
-#siteHidden {
-  font-family: geosanslight;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(70, 112, 161, 0.5);
-  padding-bottom: 50px;
-}
-
-.siteContainer {
-  width: 700px;
-  display: flex;
-  flex-direction: row;
-}
-
-.siteCont {
-  margin-top: 15px;
-  padding-left: 15px;
-  justify-content: center;
-  flex-flow: column;
-  align-items: center;
-}
-
-.infoHead {
-  background: rgb(70, 112, 161);
-  text-align: left;
-}
-
-.infoHead a {
-  text-decoration: none;
-  color: black;
-}
-
 table {
   width: 350px;
   font-size: 20px;
@@ -111,17 +40,6 @@ table {
   position: relative;
 }
 
-.natTbWrapper {
-  height: 350px;
-  width: 500px;
-  overflow: scroll;
-  position: relative;
-}
-
-.natTable {
-  width: 500px;
-}
-
 td {
   border-bottom: 1px solid #ddd;
 }
@@ -132,12 +50,6 @@ td {
 
 .tableDiv {
   margin-top: 15px;
-}
-
-#natSide {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .headCenter {
