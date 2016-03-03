@@ -10,9 +10,13 @@ $(function (){
   costArr = [],
   countArr = [],
   capArr = [],
+  stateArr = [],
   costRanking,
   capRanking,
   countRanking,
+  keyCap,
+  keyCount,
+  keyCost,
   states = [
     ['Arizona', 'AZ'],
     ['Alabama', 'AL'],
@@ -98,6 +102,10 @@ $(function (){
 
     //sorting and totalling feature
     for ( var key in stateData ) {
+      keyCount = stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      keyCap = stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      keyCost = stateData[key].cost.toFixed(2);
+      stateArr.push([key, stateData[key].count, stateData[key].cap, stateData[key].cost])
       countArr.push([key, stateData[key].count])
       countArr.sort(function(a, b){
         return b[1] - a[1]
@@ -113,10 +121,45 @@ $(function (){
       countTotal += stateData[key].count;
       costTotal += stateData[key].cost;
       capTotal += stateData[key].cap;
-    $('.natTbTarget').append("<tr><td>" + key + "</td><td>" + stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td>" + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "</td><td>" + stateData[key].cost.toFixed(2) + "</td></tr>")
-    }
+      // create national stats table
+      $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + key + "</td><td class='rowRemove'>" + keyCount + "</td><td class='rowRemove'>" + keyCap + "</td><td class='rowRemove'>" + keyCost + "</td></tr class='rowRemove'>")
 
-    // load national averages
+
+      // by count
+      $('.countButton').on('click',function(){
+        $('.rowRemove').remove();
+        stateArr.sort(function(a, b){
+          return b[1] - a[1];
+          for (var i = 0; i < stateArr.length; i++) {
+            $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1] + "</td><td class='rowRemove'>" + stateArr[i][2] + "</td><td class='rowRemove'>" + stateArr[i][3] + "</td></tr>")
+          }
+        })
+      })
+
+      // by cap
+      $('.capButton').on('click',function(){
+        $('.rowRemove').remove();
+        stateArr.sort(function(a, b){
+          return b[2] - a[2];
+        for (var i = 0; i < stateArr.length; i++) {
+          $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1] + "</td><td class='rowRemove'>" + stateArr[i][2] + "</td><td class='rowRemove'>" + stateArr[i][3] + "</td></tr>")
+          }
+        })
+      })
+
+      // by cost
+      $('.costButton').on('click',function(){
+        $('.rowRemove').remove();
+        stateArr.sort(function(a, b){
+          return b[3] - a[3];
+          for (var i = 0; i < stateArr.length; i++) {
+            $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove'>" + stateArr[i][0] + "</td><td class='rowRemove'>" + stateArr[i][1] + "</td><td class='rowRemove'>" + stateArr[i][2] + "</td><td class='rowRemove'>" + stateArr[i][3] + "</td></tr>")
+          }
+        })
+      })
+
+    }
+    // load national averages}
     $('#count').append("<h3>Total Installations Nationwide:</h3><h4>" + countTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</h4>");
     $('#cost').append("<h3>Average National Costs:</h3><h4>$" + (costTotal/costArr.length).toFixed(2) + " / watt</h4>");
     $('#cap').append("<h3>Total Capacity:</h3><h4>" + capTotal.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW</h4>");
@@ -172,11 +215,14 @@ $(function (){
           capRank(data.name);
           costRank(data.name);
           for (var key in stateData){
+            keyCount = stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            keyCap = stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            keyCost = stateData[key].cost.toFixed(2);
             if(data.name == key){
               (function pop (){
                 $('.pu').show();
                 $('.puTitleHolder').append("<div class='puTitle'><h3>" + stateName + "</h3></div>");
-                $('.puTable').append("<tr class='rowRemove'><td class='rowRemove'>" + stateData[key].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Systems Installed</td><td class='puCenter rowRemove'>" + countRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove'>" + stateData[key].cap.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " kW Capacity</td><td class='puCenter rowRemove'>" + capRanking + "</td></tr class='rowRemove'><tr><td class='rowRemove'>Avg. Cost: $" + stateData[key].cost.toFixed(2) + " / watt</td><td class='puCenter rowRemove'>" + costRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove' colspan=2>" + stateData[key].policies + " Solar Policies Enacted</td></tr>")
+                $('.puTable').append("<tr class='rowRemove'><td class='rowRemove'>" + keyCount + " Systems Installed</td><td class='puCenter rowRemove'>" + countRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove'>" + keyCap + " kW Capacity</td><td class='puCenter rowRemove'>" + capRanking + "</td></tr class='rowRemove'><tr><td class='rowRemove'>Avg. Cost: $" + keyCost + " / watt</td><td class='puCenter rowRemove'>" + costRanking + "</td></tr><tr class='rowRemove'><td class='rowRemove' colspan=2>" + stateData[key].policies + " Solar Policies Enacted</td></tr>")
               }())
             }
           }
