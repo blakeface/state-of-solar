@@ -245,7 +245,7 @@ body {
   flex-flow: column;
   align-items: center; }
 
-.siteHead {
+.infoHead {
   background: #4670a1;
   text-align: left; }
 
@@ -281,3 +281,6 @@ td {
   display: flex;
   flex-direction: column;
   justify-content: space-between; }
+
+.headCenter {
+  text-align: center; }
