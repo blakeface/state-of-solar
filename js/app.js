@@ -190,6 +190,7 @@ $(function (){
           clickVerifier++;
           console.log(clickVerifier);
 
+
           // state abbreviation translator
           (function abbrState(abbr){
             for (var j = 0; j < states.length; j++) {
