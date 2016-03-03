@@ -196,6 +196,12 @@ body {
 .info a {
   text-decoration: none; }
 
+.infoHead:hover {
+  background: #DC9D39; }
+
+.infoHead:active {
+  background: #DC9D39; }
+
 table {
   width: 350px;
   font-size: 20px; }

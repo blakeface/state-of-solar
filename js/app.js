@@ -134,6 +134,10 @@ $(function (){
       $('.natTbTarget').append("<tr class='rowRemove'><td class='rowRemove' id='nat-col-1'>" + key + "</td><td class='rowRemove nat-col-3'>" + keyCount + "</td><td class='rowRemove nat-col-2'>" + keyCap + "</td><td class='rowRemove nat-col-2'>" + keyCost + "</td></tr>")
       // by count
       $('.countButton').on('click',function(){
+        $('.bgCount').css({'background-color': '#DC9D39'});
+        $('.bgState').css({'background-color': ''});
+        $('.bgCost').css({'background-color': ''});
+        $('.bgCap').css({'background-color': ''});
         $('.rowRemove').remove();
         stateArr.sort(function(a, b){
           return b[1] - a[1];
@@ -144,6 +148,10 @@ $(function (){
       })
       // by cap
       $('.capButton').on('click',function(){
+        $('.bgCap').css({'background-color': '#DC9D39'});
+        $('.bgState').css({'background-color': ''});
+        $('.bgCost').css({'background-color': ''});
+        $('.bgCount').css({'background-color': ''});
         $('.rowRemove').remove();
         stateArr.sort(function(a, b){
           return b[2] - a[2];
@@ -154,6 +162,10 @@ $(function (){
       })
       // by cost
       $('.costButton').on('click',function(){
+        $('.bgCost').css({'background-color': '#DC9D39'});
+        $('.bgState').css({'background-color': ''});
+        $('.bgCount').css({'background-color': ''});
+        $('.bgCap').css({'background-color': ''});
         $('.rowRemove').remove();
         stateArr.sort(function(a, b){
           return b[3] - a[3];
@@ -164,6 +176,10 @@ $(function (){
       })
       // by state
       $('.stateButton').on('click',function(){
+        $('.bgState').css({'background-color': '#DC9D39'});
+        $('.bgCount').css({'background-color': ''});
+        $('.bgCost').css({'background-color': ''});
+        $('.bgCap').css({'background-color': ''});
         $('.rowRemove').remove();
         stateArr.sort();
         for (var i = 0; i < stateArr.length; i++) {
@@ -296,17 +312,20 @@ $(function (){
       document.getElementById('siteHidden').scrollIntoView();
 
       // state sort
-      $('#infoStateButt').on('click', function(){
+      $('.infoStateButt').on('click', function(){
+        $('.infoStateButt').css({'background-color': '#DC9D39'});
+        $('.infoClickButt').css({'background-color': ''});
         $('.rowRemove').remove();
         lsArr.sort();
         for (var i = 0; i < lsArr.length; i++) {
           $('.tableContent').append("<tr class='rowRemove'><td class='rowRemove' id='col-1'>" + lsArr[i][0] + "</td><td class='rowRemove'>" + lsArr[i][1] + "</td></tr>");
         }
-        console.log(lsArr);
       })
 
       // click sort
-      $('#infoClickButt').on('click', function(){
+      $('.infoClickButt').on('click', function(){
+        $('.infoStateButt').css({'background-color': ''});
+        $('.infoClickButt').css({'background-color': '#DC9D39'});
         $('.rowRemove').remove();
         lsArr.sort(function(a, b){
           return b[1] - a[1];
