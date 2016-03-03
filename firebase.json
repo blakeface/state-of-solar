@@ -1,0 +1,9 @@
+{
+  "firebase": "state-of-solar",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
