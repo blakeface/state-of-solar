@@ -1,8 +1,12 @@
 # State of Solar
-This interactive website will provide the user with a flavor of each state's current solar energy landscape. Using 2 unique API's from NREL, the site will present realtime data of:
+This website tracks solar energy deployment on a state-by-state basis - specifically focusing on:
 
--Total number of installations
--Average cost of solar ($/watt)
--Total number of solar policies
+- Total number of installations
+- Average cost of solar ($/watt)
+- Total number of solar policies
 
-The user will be able to interact with a map of the US and the information will be displayed through a pop-up modal.
+The user interacts with a map of the USA and will view a state's data through a pop-up modal.
+
+The site was built with Rafaeljs, AJAX, Jquery, SCSS, and uses 2 of NREL's open-sourced APIs.   
+
+Deployed [here](http://blakeface.github.io/state-of-solar/)
